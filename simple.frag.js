@@ -9,7 +9,7 @@ struct Material {
     diffuseColor : vec3f,
     specularColor : vec3f,
     shininess : f32,
-    useTexture : u32,
+    useTexture : f32,
 };
 
 struct SceneData {
@@ -36,7 +36,7 @@ fn main(input : VertexOutput) -> @location(0) vec4f {
     let V = normalize(scene.viewPos - input.fragPosition);
     
     var baseColor = scene.material.diffuseColor;
-    if (scene.material.useTexture == 1u) {
+    if (scene.material.useTexture > 0.5) {
         baseColor = textureSample(colorTexture, textureSampler, input.fragUV).rgb;
     }
 
